@@ -11,13 +11,14 @@
             buildForRunning = "YES"
             buildForProfiling = "YES"
             buildForArchiving = "YES"
-            buildForAnalyzing = "YES">
+            buildForAnalyzing = "YES"
+            hideIssues = "NO">
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "654C0FE11C23F0000052E1D1"
-               BuildableName = "j131.tk-iOS.app"
-               BlueprintName = "j131.tk-iOS"
-               ReferencedContainer = "container:j131.tk-iOS.xcodeproj">
+               BuildableName = "j131.tk.app"
+               BlueprintName = "j131.tk"
+               ReferencedContainer = "container:j131.tk.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>
@@ -33,9 +34,9 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "654C0FF51C23F0010052E1D1"
-               BuildableName = "j131.tk-iOSTests.xctest"
-               BlueprintName = "j131.tk-iOSTests"
-               ReferencedContainer = "container:j131.tk-iOS.xcodeproj">
+               BuildableName = "j131.tk.xctest"
+               BlueprintName = "j131.tkTests"
+               ReferencedContainer = "container:j131.tk.xcodeproj">
             </BuildableReference>
          </TestableReference>
          <TestableReference
@@ -43,9 +44,9 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "654C10001C23F0010052E1D1"
-               BuildableName = "j131.tk-iOSUITests.xctest"
-               BlueprintName = "j131.tk-iOSUITests"
-               ReferencedContainer = "container:j131.tk-iOS.xcodeproj">
+               BuildableName = "j131.tk.xctest"
+               BlueprintName = "j131.tkUITests"
+               ReferencedContainer = "container:j131.tk.xcodeproj">
             </BuildableReference>
          </TestableReference>
       </Testables>
@@ -53,9 +54,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "654C0FE11C23F0000052E1D1"
-            BuildableName = "j131.tk-iOS.app"
-            BlueprintName = "j131.tk-iOS"
-            ReferencedContainer = "container:j131.tk-iOS.xcodeproj">
+            BuildableName = "j131.tk.app"
+            BlueprintName = "j131.tk"
+            ReferencedContainer = "container:j131.tk.xcodeproj">
          </BuildableReference>
       </MacroExpansion>
       <AdditionalOptions>
@@ -76,9 +77,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "654C0FE11C23F0000052E1D1"
-            BuildableName = "j131.tk-iOS.app"
-            BlueprintName = "j131.tk-iOS"
-            ReferencedContainer = "container:j131.tk-iOS.xcodeproj">
+            BuildableName = "j131.tk.app"
+            BlueprintName = "j131.tk"
+            ReferencedContainer = "container:j131.tk.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
       <AdditionalOptions>
@@ -95,9 +96,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "654C0FE11C23F0000052E1D1"
-            BuildableName = "j131.tk-iOS.app"
-            BlueprintName = "j131.tk-iOS"
-            ReferencedContainer = "container:j131.tk-iOS.xcodeproj">
+            BuildableName = "j131.tk.app"
+            BlueprintName = "j131.tk"
+            ReferencedContainer = "container:j131.tk.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
    </ProfileAction>

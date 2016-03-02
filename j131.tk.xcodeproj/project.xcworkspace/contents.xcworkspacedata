@@ -2,6 +2,6 @@
 <Workspace
    version = "1.0">
    <FileRef
-      location = "self:j131.tk-iOS.xcodeproj">
+      location = "self:/Users/daniel/OSChina/j131.tk-iOS/j131.tk.xcodeproj">
    </FileRef>
 </Workspace>
