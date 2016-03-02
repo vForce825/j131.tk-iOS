@@ -41,6 +41,7 @@ class MainController: UITableViewController {
             let newVC = MainController();
             newVC.title = fileList![indexPath.row].Name;
             newVC.path = fileList![indexPath.row].Path;
+            newVC.tableView.rowHeight = self.tableView.rowHeight;
             self.navigationController?.pushViewController(newVC, animated: true);
         } else {
             
