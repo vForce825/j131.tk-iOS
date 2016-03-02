@@ -3,7 +3,6 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10083"/>
-        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <scenes>
         <!--计131资源共享站-->
@@ -14,38 +13,6 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                        <prototypes>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" restorationIdentifier="itemCell" selectionStyle="default" indentationWidth="10" reuseIdentifier="itemCell" rowHeight="57" id="Rwq-zh-Rjq">
-                                <rect key="frame" x="0.0" y="92" width="600" height="57"/>
-                                <autoresizingMask key="autoresizingMask"/>
-                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="Rwq-zh-Rjq" id="jsY-Aq-I4G">
-                                    <rect key="frame" x="0.0" y="0.0" width="600" height="56"/>
-                                    <autoresizingMask key="autoresizingMask"/>
-                                    <subviews>
-                                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="HSO-t4-MTD">
-                                            <rect key="frame" x="14" y="-2" width="60" height="48"/>
-                                            <constraints>
-                                                <constraint firstAttribute="width" constant="60" id="arz-8N-H1v"/>
-                                            </constraints>
-                                        </imageView>
-                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="undefined" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vnM-Sa-IgF">
-                                            <rect key="frame" x="82" y="11" width="510" height="21"/>
-                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                            <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                            <nil key="highlightedColor"/>
-                                        </label>
-                                    </subviews>
-                                    <constraints>
-                                        <constraint firstItem="vnM-Sa-IgF" firstAttribute="trailing" secondItem="jsY-Aq-I4G" secondAttribute="trailingMargin" id="8NR-Id-jbf"/>
-                                        <constraint firstItem="HSO-t4-MTD" firstAttribute="leading" secondItem="jsY-Aq-I4G" secondAttribute="leadingMargin" constant="6" id="8Oo-zy-X3V"/>
-                                        <constraint firstItem="HSO-t4-MTD" firstAttribute="centerY" secondItem="vnM-Sa-IgF" secondAttribute="centerY" id="Djh-Bb-bPs"/>
-                                        <constraint firstItem="vnM-Sa-IgF" firstAttribute="top" secondItem="jsY-Aq-I4G" secondAttribute="topMargin" constant="3" id="P6I-Ch-BRf"/>
-                                        <constraint firstItem="HSO-t4-MTD" firstAttribute="top" secondItem="jsY-Aq-I4G" secondAttribute="topMargin" constant="-10" id="Vxi-89-vdU"/>
-                                        <constraint firstItem="vnM-Sa-IgF" firstAttribute="leading" secondItem="HSO-t4-MTD" secondAttribute="trailing" constant="8" symbolic="YES" id="faf-QP-Z2s"/>
-                                    </constraints>
-                                </tableViewCellContentView>
-                            </tableViewCell>
-                        </prototypes>
                         <connections>
                             <outlet property="dataSource" destination="pYX-ZS-dc4" id="Abq-4P-eij"/>
                             <outlet property="delegate" destination="pYX-ZS-dc4" id="OF9-6W-K13"/>

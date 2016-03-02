@@ -14,6 +14,8 @@ class MainController: UITableViewController {
     internal var path:String = "/";
     
     override func viewDidLoad() {
+        self.tableView.registerNib(UINib(nibName: "ItemCell", bundle: nil), forCellReuseIdentifier: "ItemCell");
+        self.tableView.registerClass(ItemCell.self, forCellReuseIdentifier: "itemCellClass");
         fileList = downloadFileList(self.path);
     }
     
@@ -29,8 +31,9 @@ class MainController: UITableViewController {
     }
     
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell = UITableViewCell(style: UITableViewCellStyle.Subtitle, reuseIdentifier: fileList![indexPath.row].Name);
-        cell.textLabel?.text = fileList![indexPath.row].Name + "（" + fileList![indexPath.row].showType() + "）";
+        let cell = tableView.dequeueReusableCellWithIdentifier("ItemCell", forIndexPath: indexPath) as! ItemCell;
+        cell.loadImage(fileList![indexPath.row].Type == WebFile.TYPE_FOLDER);
+        cell.itemName?.text = fileList![indexPath.row].Name;
         return cell;
     }
     override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
