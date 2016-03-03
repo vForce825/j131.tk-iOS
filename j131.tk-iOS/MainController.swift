@@ -8,7 +8,7 @@
 
 import UIKit
 
-class MainController: UITableViewController {
+class MainController: UITableViewController, UIDocumentInteractionControllerDelegate {
     private var fileList:FileList?;
     private var alertQueue:Queue<UIAlertController> = Queue<UIAlertController>();
     internal var path:String = "/";
@@ -44,8 +44,31 @@ class MainController: UITableViewController {
             newVC.tableView.rowHeight = self.tableView.rowHeight;
             self.navigationController?.pushViewController(newVC, animated: true);
         } else {
-            
+            do {
+                let tmpDirectory = NSTemporaryDirectory();
+                let path = fileList![indexPath.row].Path;
+                let fileDir = tmpDirectory.stringByAppendingString(path.substringFromIndex(path.startIndex.advancedBy(1)));
+                let file = try HttpRequest.get("http://www.j131.tk" + self.fileList![indexPath.row].Path);
+                if (file == nil) {
+                    self.showError("下载失败", message: "服务器返回了空数据，请稍后重试！");
+                }
+                file?.writeToFile(fileDir, atomically: true);
+                let fileUrl = NSURL(fileURLWithPath: fileDir);
+                let docInteractionVC = UIDocumentInteractionController(URL: fileUrl);
+                docInteractionVC.delegate = self;
+                let otherCanOpen:Bool = docInteractionVC.presentPreviewAnimated(true);
+                if (!otherCanOpen) {
+                    self.showError("无法打开文件", message: "没有对应的应用程序可以打开此文件！");
+                }
+            } catch {
+                self.showError("打开失败", message: "下载文件时遇到错误！请重试！");
+            }
         }
+    }
+    
+    //UIDocumentInteractionController Delegate Function
+    func documentInteractionControllerViewControllerForPreview(controller: UIDocumentInteractionController) -> UIViewController {
+        return self.navigationController!;
     }
     
     //Tool Functions
