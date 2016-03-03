@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		654ACF111C88536100659164 /* FileMD5Hash.c in Sources */ = {isa = PBXBuildFile; fileRef = 654ACF0F1C88536100659164 /* FileMD5Hash.c */; };
 		654C0FE61C23F0010052E1D1 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 654C0FE51C23F0010052E1D1 /* AppDelegate.swift */; };
 		654C0FEB1C23F0010052E1D1 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 654C0FE91C23F0010052E1D1 /* Main.storyboard */; };
 		654C0FED1C23F0010052E1D1 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 654C0FEC1C23F0010052E1D1 /* Assets.xcassets */; };
@@ -41,6 +42,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		654ACF0E1C88536000659164 /* j131.tk-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "j131.tk-Bridging-Header.h"; sourceTree = "<group>"; };
+		654ACF0F1C88536100659164 /* FileMD5Hash.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = FileMD5Hash.c; sourceTree = "<group>"; };
 		654C0FE21C23F0000052E1D1 /* j131.tk.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = j131.tk.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		654C0FE51C23F0010052E1D1 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		654C0FEA1C23F0010052E1D1 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -158,6 +161,8 @@
 				65AB46C91C85ABCF00E1EA38 /* HttpRequest.swift */,
 				65AB46CA1C85ABCF00E1EA38 /* Queue.swift */,
 				65AB46CB1C85ABCF00E1EA38 /* Stack.swift */,
+				654ACF0F1C88536100659164 /* FileMD5Hash.c */,
+				654ACF0E1C88536000659164 /* j131.tk-Bridging-Header.h */,
 			);
 			name = lib;
 			sourceTree = "<group>";
@@ -240,7 +245,7 @@
 		654C0FDA1C23F0000052E1D1 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastSwiftUpdateCheck = 0720;
+				LastSwiftUpdateCheck = 0730;
 				LastUpgradeCheck = 0720;
 				ORGANIZATIONNAME = Daniel;
 				TargetAttributes = {
@@ -313,6 +318,7 @@
 			files = (
 				65AB46CF1C85ABCF00E1EA38 /* Queue.swift in Sources */,
 				656455521C86E0F100D83EB0 /* ItemCell.swift in Sources */,
+				654ACF111C88536100659164 /* FileMD5Hash.c in Sources */,
 				658601651C85B8CE00D621BB /* MainController.swift in Sources */,
 				65AB46D01C85ABCF00E1EA38 /* Stack.swift in Sources */,
 				65AB46CE1C85ABCF00E1EA38 /* HttpRequest.swift in Sources */,
@@ -460,12 +466,15 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				INFOPLIST_FILE = "j131.tk-iOS/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = tk.j131.iOS;
 				PRODUCT_NAME = j131.tk;
+				SWIFT_OBJC_BRIDGING_HEADER = "j131.tk-iOS/j131.tk-Bridging-Header.h";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 			};
 			name = Debug;
 		};
@@ -473,12 +482,14 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				INFOPLIST_FILE = "j131.tk-iOS/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = tk.j131.iOS;
 				PRODUCT_NAME = j131.tk;
+				SWIFT_OBJC_BRIDGING_HEADER = "j131.tk-iOS/j131.tk-Bridging-Header.h";
 			};
 			name = Release;
 		};

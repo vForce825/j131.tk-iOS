@@ -45,21 +45,18 @@ class MainController: UITableViewController, UIDocumentInteractionControllerDele
             self.navigationController?.pushViewController(newVC, animated: true);
         } else {
             do {
-                let tmpDirectory = NSTemporaryDirectory();
-                let path = fileList![indexPath.row].Path;
-                let fileDir = tmpDirectory.stringByAppendingString(path.substringFromIndex(path.startIndex.advancedBy(1)));
-                let file = try HttpRequest.get("http://www.j131.tk" + self.fileList![indexPath.row].Path);
-                if (file == nil) {
-                    self.showError("下载失败", message: "服务器返回了空数据，请稍后重试！");
+                let remotePath = fileList![indexPath.row].Path;
+                let localFilePath = NSTemporaryDirectory().stringByAppendingString(remotePath.substringFromIndex(path.startIndex.advancedBy(1)).stringByReplacingOccurrencesOfString("/", withString: "_"));
+                //for local static cache
+                if (!NSFileManager().fileExistsAtPath(localFilePath)) {
+                    let fileContent = try HttpRequest.get("http://www.j131.tk" + remotePath);
+                    if (fileContent == nil) {
+                        self.showError("下载失败", message: "服务器返回了空数据，请稍后重试！");
+                    }
+                    fileContent!.writeToFile(localFilePath, atomically: true);
                 }
-                file?.writeToFile(fileDir, atomically: true);
-                let fileUrl = NSURL(fileURLWithPath: fileDir);
-                let docInteractionVC = UIDocumentInteractionController(URL: fileUrl);
-                docInteractionVC.delegate = self;
-                let otherCanOpen:Bool = docInteractionVC.presentPreviewAnimated(true);
-                if (!otherCanOpen) {
-                    self.showError("无法打开文件", message: "没有对应的应用程序可以打开此文件！");
-                }
+                let localUrl = NSURL(fileURLWithPath: localFilePath);
+                previewFile(localUrl);
             } catch {
                 self.showError("打开失败", message: "下载文件时遇到错误！请重试！");
             }
@@ -69,6 +66,15 @@ class MainController: UITableViewController, UIDocumentInteractionControllerDele
     //UIDocumentInteractionController Delegate Function
     func documentInteractionControllerViewControllerForPreview(controller: UIDocumentInteractionController) -> UIViewController {
         return self.navigationController!;
+    }
+    
+    func previewFile(localURL: NSURL) {
+        let docInteractionVC = UIDocumentInteractionController(URL: localURL);
+        docInteractionVC.delegate = self;
+        let otherCanOpen:Bool = docInteractionVC.presentPreviewAnimated(true);
+        if (!otherCanOpen) {
+            self.showError("无法打开文件", message: "没有对应的应用程序可以打开此文件！");
+        }
     }
     
     //Tool Functions
