@@ -23,6 +23,7 @@
 		65AB46CF1C85ABCF00E1EA38 /* Queue.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65AB46CA1C85ABCF00E1EA38 /* Queue.swift */; };
 		65AB46D01C85ABCF00E1EA38 /* Stack.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65AB46CB1C85ABCF00E1EA38 /* Stack.swift */; };
 		65DF2EAD1C892EBD00E11D43 /* Reachability.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65DF2EAC1C892EBD00E11D43 /* Reachability.swift */; };
+		65DF2EAF1C89347900E11D43 /* SettingController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65DF2EAE1C89347900E11D43 /* SettingController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -66,6 +67,7 @@
 		65AB46CA1C85ABCF00E1EA38 /* Queue.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Queue.swift; sourceTree = "<group>"; };
 		65AB46CB1C85ABCF00E1EA38 /* Stack.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Stack.swift; sourceTree = "<group>"; };
 		65DF2EAC1C892EBD00E11D43 /* Reachability.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Reachability.swift; sourceTree = "<group>"; };
+		65DF2EAE1C89347900E11D43 /* SettingController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -182,6 +184,7 @@
 			isa = PBXGroup;
 			children = (
 				658601641C85B8CE00D621BB /* MainController.swift */,
+				65DF2EAE1C89347900E11D43 /* SettingController.swift */,
 			);
 			name = controller;
 			sourceTree = "<group>";
@@ -327,6 +330,7 @@
 				65AB46CE1C85ABCF00E1EA38 /* HttpRequest.swift in Sources */,
 				65AB46CD1C85ABCF00E1EA38 /* FileList.swift in Sources */,
 				654C0FE61C23F0010052E1D1 /* AppDelegate.swift in Sources */,
+				65DF2EAF1C89347900E11D43 /* SettingController.swift in Sources */,
 				65DF2EAD1C892EBD00E11D43 /* Reachability.swift in Sources */,
 				65AB46CC1C85ABCF00E1EA38 /* ApiRequest.swift in Sources */,
 			);

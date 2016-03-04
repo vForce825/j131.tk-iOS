@@ -64,6 +64,7 @@ class MainController: UITableViewController, UIDocumentInteractionControllerDele
                 }
                 let localUrl = NSURL(fileURLWithPath: localFilePath);
                 previewFile(localUrl);
+                self.tableView!.deselectRowAtIndexPath(indexPath, animated: true);
             } catch {
                 self.showError("打开失败", message: "下载文件时遇到错误！请重试！");
             }
@@ -82,6 +83,7 @@ class MainController: UITableViewController, UIDocumentInteractionControllerDele
         let otherCanOpen:Bool = docInteractionVC.presentPreviewAnimated(true);
         if (!otherCanOpen) {
             self.showError("无法打开文件", message: "没有对应的应用程序可以打开此文件！");
+            self.tabBarController?.tabBar.hidden = false;
         }
         self.navigationItem.leftBarButtonItem?.target = "showTabBar";
     }
