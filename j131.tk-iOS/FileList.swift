@@ -49,7 +49,7 @@ class WebFile {
     init(name: String, path:String) {
         _name = name;
         _path = path;
-        _type = path.substringWithRange(Range(start: path.endIndex.advancedBy(-1), end: path.endIndex)) == "/" ? WebFile.TYPE_FOLDER : WebFile.TYPE_FILE;
+        _type = path.substringWithRange(path.endIndex.advancedBy(-1) ..< path.endIndex) == "/" ? WebFile.TYPE_FOLDER : WebFile.TYPE_FILE;
     }
     var Name:String {
         get {

@@ -23,6 +23,7 @@ class MainController: UITableViewController, UIDocumentInteractionControllerDele
         while (alertQueue.Count != 0) {
             self.presentViewController(alertQueue.Pop(), animated: true, completion: nil);
         }
+        self.tabBarController?.tabBar.hidden = false;
     }
     
     //TableView Data Source
@@ -36,6 +37,7 @@ class MainController: UITableViewController, UIDocumentInteractionControllerDele
         cell.itemName?.text = fileList![indexPath.row].Name;
         return cell;
     }
+    
     override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         if (fileList![indexPath.row].Type == WebFile.TYPE_FOLDER) {
             let newVC = MainController();
@@ -48,7 +50,12 @@ class MainController: UITableViewController, UIDocumentInteractionControllerDele
                 let remotePath = fileList![indexPath.row].Path;
                 let localFilePath = NSTemporaryDirectory().stringByAppendingString(remotePath.substringFromIndex(path.startIndex.advancedBy(1)).stringByReplacingOccurrencesOfString("/", withString: "_"));
                 //for local static cache
-                if (!NSFileManager().fileExistsAtPath(localFilePath)) {
+                let localMd5hash = FileMD5HashCreateWithPath(localFilePath as CFStringRef, 4096);//It will be nil if the file doesn't exist
+                var params = Dictionary<String, String>();
+                params["path"] = remotePath;
+                let remoteMd5Hash = ApiRequest.get(ApiRequest.FILE_CHECKSUM, params: params)?.objectForKey("msg");
+                //When server failed to respond a checksum, we will re-fetch the file
+                if (localMd5hash == nil || remoteMd5Hash == nil || (remoteMd5Hash != nil && localMd5hash.takeUnretainedValue() as String != remoteMd5Hash as! String)) {
                     let fileContent = try HttpRequest.get("http://www.j131.tk" + remotePath);
                     if (fileContent == nil) {
                         self.showError("下载失败", message: "服务器返回了空数据，请稍后重试！");
@@ -71,10 +78,12 @@ class MainController: UITableViewController, UIDocumentInteractionControllerDele
     func previewFile(localURL: NSURL) {
         let docInteractionVC = UIDocumentInteractionController(URL: localURL);
         docInteractionVC.delegate = self;
+        self.tabBarController!.tabBar.hidden = true;
         let otherCanOpen:Bool = docInteractionVC.presentPreviewAnimated(true);
         if (!otherCanOpen) {
             self.showError("无法打开文件", message: "没有对应的应用程序可以打开此文件！");
         }
+        self.navigationItem.leftBarButtonItem?.target = "showTabBar";
     }
     
     //Tool Functions
@@ -105,5 +114,9 @@ class MainController: UITableViewController, UIDocumentInteractionControllerDele
         } else {
             alertQueue.Push(alert);
         }
+    }
+    
+    func showTabBar() {
+        self.tabBarController?.tabBar.hidden = false;
     }
 }

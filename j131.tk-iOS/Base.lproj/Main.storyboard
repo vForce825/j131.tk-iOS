@@ -28,7 +28,7 @@
         <scene sceneID="RTT-yb-5Qw">
             <objects>
                 <navigationController id="14p-iu-86D" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="资源浏览" id="fPK-nd-zot"/>
+                    <tabBarItem key="tabBarItem" title="资源浏览" image="settingButton" id="fPK-nd-zot"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="JtT-7E-b3m">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
@@ -79,4 +79,7 @@
             <point key="canvasLocation" x="-428" y="219"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="settingButton" width="25" height="25"/>
+    </resources>
 </document>

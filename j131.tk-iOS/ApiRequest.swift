@@ -11,15 +11,11 @@ import UIKit
 class ApiRequest {
     static let LIST_COUNT = "http://api.j131.tk/api/listCount";
     static let LIST_FOLDER = "http://api.j131.tk/api/listFolder";
+    static let FILE_CHECKSUM = "http://api.j131.tk/api/fileChecksum";
     static func get(url: String, params: Dictionary<String, String>?) -> AnyObject? {
-        /*let urlComponents = NSURLComponents(string: url);
-        var queryItems:[NSURLQueryItem] = [];
-        if (params != nil) {
-            for (key, value) in params! {
-                queryItems.append(NSURLQueryItem(name: key, value: value));
-            }
+        if (Reachability().connectionStatus() == ReachabilityStatus.Offline) {
+            return nil;
         }
-        urlComponents?.queryItems = queryItems;*/
         var requestURL = url + "?";
         for (key, value) in params! {
             requestURL += "\(key)=\(value)&";
