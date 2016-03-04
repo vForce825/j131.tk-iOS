@@ -131,3 +131,23 @@ func == (left: ReachabilityStatus, right: ReachabilityStatus) -> Bool {
             }
     }
 }
+
+func != (left: ReachabilityStatus, right: ReachabilityStatus) -> Bool {
+    switch left {
+    case .Offline:
+        switch right {
+            case .Offline: return false
+            default: return true
+        }
+    case .Unknown:
+        switch right {
+            case .Unknown: return false
+            default: return true
+        }
+    case let .Online(str1):
+        switch right {
+            case let .Online(str2) : return (str1 != str2)
+            default: return true // Cover all cases
+        }
+    }
+}

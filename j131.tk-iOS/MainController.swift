@@ -55,19 +55,27 @@ class MainController: UITableViewController, UIDocumentInteractionControllerDele
                 params["path"] = remotePath;
                 let remoteMd5Hash = ApiRequest.get(ApiRequest.FILE_CHECKSUM, params: params)?.objectForKey("msg");
                 //When server failed to respond a checksum, we will re-fetch the file
+                //But if the network in unavailable, we'll check if we have its cache
                 if (localMd5hash == nil || remoteMd5Hash == nil || (remoteMd5Hash != nil && localMd5hash.takeUnretainedValue() as String != remoteMd5Hash as! String)) {
-                    let fileContent = try HttpRequest.get("http://www.j131.tk" + remotePath);
-                    if (fileContent == nil) {
-                        self.showError("下载失败", message: "服务器返回了空数据，请稍后重试！");
+                    if (Reachability().connectionStatus() != ReachabilityStatus.Offline) {
+                        let fileContent = try HttpRequest.get("http://www.j131.tk" + remotePath);
+                        if (fileContent == nil) {
+                            self.showError("下载失败", message: "没有接收到服务器的返回数据，请稍后重试！");
+                        } else {
+                            fileContent!.writeToFile(localFilePath, atomically: true);
+                        }
                     }
-                    fileContent!.writeToFile(localFilePath, atomically: true);
                 }
-                let localUrl = NSURL(fileURLWithPath: localFilePath);
-                previewFile(localUrl);
-                self.tableView!.deselectRowAtIndexPath(indexPath, animated: true);
+                if (NSFileManager.defaultManager().fileExistsAtPath(localFilePath)) {
+                    let localUrl = NSURL(fileURLWithPath: localFilePath);
+                    previewFile(localUrl);
+                } else {
+                    self.showError("打开失败", message: "文件读取失败，请检查网络连接");
+                }
             } catch {
                 self.showError("打开失败", message: "下载文件时遇到错误！请重试！");
             }
+            self.tableView!.deselectRowAtIndexPath(indexPath, animated: true);
         }
     }
     
@@ -83,7 +91,6 @@ class MainController: UITableViewController, UIDocumentInteractionControllerDele
         let otherCanOpen:Bool = docInteractionVC.presentPreviewAnimated(true);
         if (!otherCanOpen) {
             self.showError("无法打开文件", message: "没有对应的应用程序可以打开此文件！");
-            self.tabBarController?.tabBar.hidden = false;
         }
         self.navigationItem.leftBarButtonItem?.target = "showTabBar";
     }
@@ -113,6 +120,7 @@ class MainController: UITableViewController, UIDocumentInteractionControllerDele
         alert.addAction(UIAlertAction(title: "确定", style: UIAlertActionStyle.Cancel, handler: nil));
         if (self.isViewLoaded() && (self.view.window != nil)) {
             self.presentViewController(alert, animated: true, completion: nil);
+            self.tabBarController?.tabBar.hidden = false;
         } else {
             alertQueue.Push(alert);
         }
