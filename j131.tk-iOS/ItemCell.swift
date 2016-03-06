@@ -11,10 +11,20 @@ import UIKit
 class ItemCell: UITableViewCell {
     @IBOutlet weak var itemImage: UIImageView!
     @IBOutlet weak var itemName: UILabel!
+    @IBOutlet weak var progressView: UIProgressView!
+    @IBOutlet weak var cancelButton: UIButton!
+    private var cancelButtonDownEventHandler: () -> Void;
+    
+    required init?(coder aDecoder: NSCoder) {
+        self.cancelButtonDownEventHandler = {};
+        super.init(coder: aDecoder);
+    }
     
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
+        self.progressView.hidden = true;
+        self.cancelButton.hidden = true;
     }
 
     override func setSelected(selected: Bool, animated: Bool) {
@@ -24,5 +34,13 @@ class ItemCell: UITableViewCell {
     
     func loadImage(isFolder: Bool) {
         self.itemImage.image = UIImage(named: isFolder ? "folderImg" : "fileImg");
+    }
+    
+    func registerCancelButtonDownEvent(handler: () -> Void) {
+        self.cancelButtonDownEventHandler = handler;
+    }
+    
+    @IBAction func cancelButtonDown(sender: AnyObject) {
+        cancelButtonDownEventHandler();
     }
 }

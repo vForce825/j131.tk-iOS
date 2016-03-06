@@ -17,35 +17,55 @@
                 <subviews>
                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="folderImg" translatesAutoresizingMaskIntoConstraints="NO" id="L67-E4-HaD">
                         <rect key="frame" x="0.0" y="4" width="53" height="43"/>
-                        <constraints>
-                            <constraint firstAttribute="width" constant="53" id="iFF-0t-JcZ"/>
-                        </constraints>
                     </imageView>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="undefined" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5Z4-xS-QbB">
-                        <rect key="frame" x="69" y="4" width="243" height="43"/>
+                        <rect key="frame" x="69" y="4" width="215" height="43"/>
                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                         <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                         <nil key="highlightedColor"/>
                     </label>
+                    <progressView opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="zqX-eC-lR8">
+                        <rect key="frame" x="61" y="42" width="251" height="2"/>
+                    </progressView>
+                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ygx-3b-TPi">
+                        <rect key="frame" x="284" y="8" width="28" height="36"/>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="28" id="SrW-0H-qtL"/>
+                        </constraints>
+                        <state key="normal" image="cancelButton"/>
+                        <connections>
+                            <action selector="cancelButtonDown:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="0z3-Yd-SiK"/>
+                        </connections>
+                    </button>
                 </subviews>
                 <constraints>
-                    <constraint firstItem="5Z4-xS-QbB" firstAttribute="bottom" secondItem="L67-E4-HaD" secondAttribute="bottom" id="Ap6-x1-Wp5"/>
-                    <constraint firstItem="5Z4-xS-QbB" firstAttribute="trailing" secondItem="H2p-sc-9uM" secondAttribute="trailingMargin" id="KSU-8Y-Okw"/>
-                    <constraint firstItem="5Z4-xS-QbB" firstAttribute="top" secondItem="L67-E4-HaD" secondAttribute="top" id="Pce-kD-vya"/>
-                    <constraint firstItem="L67-E4-HaD" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="topMargin" constant="-4" id="QD0-H6-7a2"/>
-                    <constraint firstItem="5Z4-xS-QbB" firstAttribute="leading" secondItem="L67-E4-HaD" secondAttribute="trailing" constant="16" id="S83-70-IhO"/>
-                    <constraint firstItem="L67-E4-HaD" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="gIn-gP-pTd"/>
-                    <constraint firstItem="L67-E4-HaD" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" id="zQ3-sX-EPr"/>
+                    <constraint firstItem="zqX-eC-lR8" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leadingMargin" constant="53" id="0qc-Kl-m5Z"/>
+                    <constraint firstItem="L67-E4-HaD" firstAttribute="bottom" secondItem="5Z4-xS-QbB" secondAttribute="bottom" id="8Fe-VH-9jx"/>
+                    <constraint firstItem="L67-E4-HaD" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" id="8oW-fy-kpJ"/>
+                    <constraint firstItem="ygx-3b-TPi" firstAttribute="bottom" secondItem="zqX-eC-lR8" secondAttribute="bottom" id="E0q-39-T1A"/>
+                    <constraint firstItem="ygx-3b-TPi" firstAttribute="trailing" secondItem="zqX-eC-lR8" secondAttribute="trailing" id="GYs-Hj-8He"/>
+                    <constraint firstItem="L67-E4-HaD" firstAttribute="top" secondItem="5Z4-xS-QbB" secondAttribute="top" id="L5c-CC-FoD"/>
+                    <constraint firstItem="ygx-3b-TPi" firstAttribute="trailing" secondItem="H2p-sc-9uM" secondAttribute="trailingMargin" id="Meh-Va-O16"/>
+                    <constraint firstItem="zqX-eC-lR8" firstAttribute="leading" secondItem="L67-E4-HaD" secondAttribute="trailing" constant="8" symbolic="YES" id="T12-mq-eqN"/>
+                    <constraint firstItem="ygx-3b-TPi" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="topMargin" id="VaT-3a-do1"/>
+                    <constraint firstItem="L67-E4-HaD" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="topMargin" constant="-4" id="Vjs-pn-fjg"/>
+                    <constraint firstItem="zqX-eC-lR8" firstAttribute="bottom" secondItem="H2p-sc-9uM" secondAttribute="bottomMargin" id="ZLD-9f-kp8"/>
+                    <constraint firstItem="5Z4-xS-QbB" firstAttribute="centerY" secondItem="ygx-3b-TPi" secondAttribute="centerY" id="Zx0-xN-Ujj"/>
+                    <constraint firstItem="ygx-3b-TPi" firstAttribute="leading" secondItem="5Z4-xS-QbB" secondAttribute="trailing" id="q9G-sd-W44"/>
+                    <constraint firstItem="5Z4-xS-QbB" firstAttribute="leading" secondItem="L67-E4-HaD" secondAttribute="trailing" constant="16" id="w1R-5z-gUb"/>
                 </constraints>
             </tableViewCellContentView>
             <connections>
+                <outlet property="cancelButton" destination="ygx-3b-TPi" id="nGP-Fj-ODv"/>
                 <outlet property="itemImage" destination="L67-E4-HaD" id="8NU-UB-wLG"/>
                 <outlet property="itemName" destination="5Z4-xS-QbB" id="64a-cq-mPP"/>
+                <outlet property="progressView" destination="zqX-eC-lR8" id="rl0-tV-kZM"/>
             </connections>
             <point key="canvasLocation" x="413" y="374.5"/>
         </tableViewCell>
     </objects>
     <resources>
+        <image name="cancelButton" width="25" height="25"/>
         <image name="folderImg" width="256" height="256"/>
     </resources>
 </document>

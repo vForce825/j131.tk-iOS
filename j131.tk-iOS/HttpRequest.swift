@@ -23,4 +23,8 @@ class HttpRequest {
         let queue = NSOperationQueue.mainQueue();
         NSURLConnection.sendAsynchronousRequest(request, queue: queue, completionHandler: completionHandler);
     }
+    
+    static func getURL(url: String) -> NSURL {
+        return NSURL(string: url.stringByAddingPercentEncodingWithAllowedCharacters(NSCharacterSet.URLQueryAllowedCharacterSet())!)!;
+    }
 }
