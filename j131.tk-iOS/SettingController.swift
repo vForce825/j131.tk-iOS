@@ -25,7 +25,7 @@ class SettingController: UIViewController {
                 
             }
         }
-        let alert = UIAlertController.init(title: "清除缓存", message: "清除成功！共清\(showFileSize(cacheSize))缓存", preferredStyle: UIAlertControllerStyle.Alert);
+        let alert = UIAlertController.init(title: "清除缓存", message: "清除成功！共清除\(showFileSize(cacheSize))缓存", preferredStyle: UIAlertControllerStyle.Alert);
         alert.addAction(UIAlertAction(title: "确定", style: UIAlertActionStyle.Cancel, handler: nil));
         self.presentViewController(alert, animated: true, completion: nil);
     }
