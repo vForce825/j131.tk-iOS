@@ -16,11 +16,7 @@ class ApiRequest {
         if (Reachability().connectionStatus() == ReachabilityStatus.Offline) {
             return nil;
         }
-        var requestURL = url + "?";
-        for (key, value) in params! {
-            requestURL += "\(key)=\(value)&";
-        }
-        requestURL = requestURL.substringToIndex(requestURL.endIndex.advancedBy(-1));
+        let requestURL = url + self.createGetParam(params);
         var httpResult:NSData?;
         do {
             httpResult = try HttpRequest.get(requestURL);
@@ -29,5 +25,21 @@ class ApiRequest {
         } catch {
             return nil;
         }
+    }
+    static func getAsync(url:String, params: Dictionary<String, String>?, completionHandler:(response: NSURLResponse?, data: NSData?, error: NSError?) -> Void) {
+        let requestURL = url + self.createGetParam(params);
+        HttpRequest.getAsync(requestURL, completionHandler: completionHandler);
+    }
+    
+    static private func createGetParam(params: Dictionary<String, String>?) -> String {
+        if (params == nil) {
+            return "";
+        }
+        var url = "?";
+        for (key, value) in params! {
+            url += "\(key)=\(value)&";
+        }
+        url = url.substringToIndex(url.endIndex.advancedBy(-1));
+        return url;
     }
 }

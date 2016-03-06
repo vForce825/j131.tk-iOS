@@ -46,35 +46,14 @@ class MainController: UITableViewController, UIDocumentInteractionControllerDele
             newVC.tableView.rowHeight = self.tableView.rowHeight;
             self.navigationController?.pushViewController(newVC, animated: true);
         } else {
-            do {
-                let remotePath = fileList![indexPath.row].Path;
-                let localFilePath = NSTemporaryDirectory().stringByAppendingString(remotePath.substringFromIndex(path.startIndex.advancedBy(1)).stringByReplacingOccurrencesOfString("/", withString: "_"));
-                //for local static cache
-                let localMd5hash = FileMD5HashCreateWithPath(localFilePath as CFStringRef, 4096);//It will be nil if the file doesn't exist
-                var params = Dictionary<String, String>();
-                params["path"] = remotePath;
-                let remoteMd5Hash = ApiRequest.get(ApiRequest.FILE_CHECKSUM, params: params)?.objectForKey("msg");
-                //When server failed to respond a checksum, we will re-fetch the file
-                //But if the network in unavailable, we'll check if we have its cache
-                if (localMd5hash == nil || remoteMd5Hash == nil || (remoteMd5Hash != nil && localMd5hash.takeUnretainedValue() as String != remoteMd5Hash as! String)) {
-                    if (Reachability().connectionStatus() != ReachabilityStatus.Offline) {
-                        let fileContent = try HttpRequest.get("http://www.j131.tk" + remotePath);
-                        if (fileContent == nil) {
-                            self.showError("下载失败", message: "没有接收到服务器的返回数据，请稍后重试！");
-                        } else {
-                            fileContent!.writeToFile(localFilePath, atomically: true);
-                        }
-                    }
-                }
+            readFile(indexPath.row, complete: { (localFilePath) in
                 if (NSFileManager.defaultManager().fileExistsAtPath(localFilePath)) {
                     let localUrl = NSURL(fileURLWithPath: localFilePath);
-                    previewFile(localUrl);
+                    self.previewFile(localUrl);
                 } else {
                     self.showError("打开失败", message: "文件读取失败，请检查网络连接");
                 }
-            } catch {
-                self.showError("打开失败", message: "下载文件时遇到错误！请重试！");
-            }
+            });
             self.tableView!.deselectRowAtIndexPath(indexPath, animated: true);
         }
     }
@@ -82,17 +61,6 @@ class MainController: UITableViewController, UIDocumentInteractionControllerDele
     //UIDocumentInteractionController Delegate Function
     func documentInteractionControllerViewControllerForPreview(controller: UIDocumentInteractionController) -> UIViewController {
         return self.navigationController!;
-    }
-    
-    func previewFile(localURL: NSURL) {
-        let docInteractionVC = UIDocumentInteractionController(URL: localURL);
-        docInteractionVC.delegate = self;
-        self.tabBarController!.tabBar.hidden = true;
-        let otherCanOpen:Bool = docInteractionVC.presentPreviewAnimated(true);
-        if (!otherCanOpen) {
-            self.showError("无法打开文件", message: "没有对应的应用程序可以打开此文件！");
-        }
-        self.navigationItem.leftBarButtonItem?.target = "showTabBar";
     }
     
     //Tool Functions
@@ -128,5 +96,44 @@ class MainController: UITableViewController, UIDocumentInteractionControllerDele
     
     func showTabBar() {
         self.tabBarController?.tabBar.hidden = false;
+    }
+    
+    func readFile(row: Int, complete: (String) -> ()) {
+        let remotePath = fileList![row].Path;
+        let localFilePath = NSTemporaryDirectory().stringByAppendingString(remotePath.substringFromIndex(path.startIndex.advancedBy(1)).stringByReplacingOccurrencesOfString("/", withString: "_"));
+        //for local static cache
+        let localMd5hash = FileMD5HashCreateWithPath(localFilePath as CFStringRef, 4096);//It will be nil if the file doesn't exist
+        var params = Dictionary<String, String>();
+        params["path"] = remotePath;
+        let remoteMd5Hash = ApiRequest.get(ApiRequest.FILE_CHECKSUM, params: params)?.objectForKey("msg");
+        //When server failed to respond a checksum, we will re-fetch the file
+        //But if the network in unavailable, we'll check if we have its cache
+        if (localMd5hash == nil || remoteMd5Hash == nil || (remoteMd5Hash != nil && localMd5hash.takeUnretainedValue() as String != remoteMd5Hash as! String)) {
+            if (Reachability().connectionStatus() != ReachabilityStatus.Offline) {
+                    HttpRequest.getAsync("http://www.j131.tk" + remotePath, completionHandler: { (response, data, error) in
+                    if (data == nil) {
+                        self.showError("下载失败", message: "没有接收到服务器的返回数据，请稍后重试！");
+                    } else if (error != nil) {
+                        self.showError("下载失败", message: "下载过程中发生错误，请重试！");
+                    } else {
+                        data!.writeToFile(localFilePath, atomically: true);
+                        complete(localFilePath);//done for download
+                    }
+                })
+            }
+        } else {
+            complete(localFilePath); //done for reading cache
+        }
+    }
+    
+    func previewFile(localURL: NSURL) {
+        let docInteractionVC = UIDocumentInteractionController(URL: localURL);
+        docInteractionVC.delegate = self;
+        self.tabBarController!.tabBar.hidden = true;
+        let otherCanOpen:Bool = docInteractionVC.presentPreviewAnimated(true);
+        if (!otherCanOpen) {
+            self.showError("无法打开文件", message: "没有对应的应用程序可以打开此文件！");
+        }
+        self.navigationItem.leftBarButtonItem?.target = "showTabBar";
     }
 }
