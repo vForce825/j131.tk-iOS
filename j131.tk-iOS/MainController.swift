@@ -15,6 +15,7 @@ class MainController: UITableViewController, UIDocumentInteractionControllerDele
     private var downloadTask:NSURLSessionDownloadTask? = nil;
     private var downloadIndex:NSIndexPath? = nil;
     private var localFilePath:String? = nil;
+    private let cacheDirectory = NSHomeDirectory().stringByAppendingString("/Library/Caches/");
     
     override func viewDidLoad() {
         self.tableView.registerNib(UINib(nibName: "ItemCell", bundle: nil), forCellReuseIdentifier: "ItemCell");
@@ -166,7 +167,7 @@ class MainController: UITableViewController, UIDocumentInteractionControllerDele
     func readFile(index: NSIndexPath, complete: (String) -> ()) {
         let row = index.row;
         let remotePath = fileList![row].Path;
-        let localFilePath = NSTemporaryDirectory().stringByAppendingString(remotePath.substringFromIndex(path.startIndex.advancedBy(1)).stringByReplacingOccurrencesOfString("/", withString: "_"));
+        let localFilePath = self.cacheDirectory.stringByAppendingString(remotePath.substringFromIndex(path.startIndex.advancedBy(1)).stringByReplacingOccurrencesOfString("/", withString: "_"));
         self.localFilePath = localFilePath;
         //for local static cache
         let localMd5hash = FileMD5HashCreateWithPath(localFilePath as CFStringRef, 4096);//It will be nil if the file doesn't exist

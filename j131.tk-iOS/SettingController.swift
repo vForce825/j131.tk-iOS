@@ -11,10 +11,12 @@ import UIKit
 class SettingController: UIViewController {
     @IBOutlet weak var clearCacheButton: UIButton!
     
+    private let cacheDirectory = NSHomeDirectory().stringByAppendingString("/Library/Caches/");
+    
     @IBAction func clearCacheButtonPressed(sender: AnyObject) {
         let fileManager = NSFileManager.defaultManager()
-        let cacheURL = NSURL(fileURLWithPath: NSTemporaryDirectory());
-        let enumerator = fileManager.enumeratorAtPath(NSTemporaryDirectory());
+        let cacheURL = NSURL(fileURLWithPath: self.cacheDirectory);
+        let enumerator = fileManager.enumeratorAtPath(self.cacheDirectory);
         var cacheSize:Double = 0;
         while let file = enumerator?.nextObject() as? String {
             do {
