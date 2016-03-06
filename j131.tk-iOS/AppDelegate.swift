@@ -41,6 +41,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
     }
 
-
+    func applicationDidFinishLaunching(application: UIApplication) {
+        let version:String = NSBundle.mainBundle().infoDictionary!["CFBundleShortVersionString"] as! String;
+        MobClick.setAppVersion(version);
+        MobClick.startWithAppkey("56d95c4de0f55ac338000699", reportPolicy: BATCH, channelId: "");
+    }
 }
 

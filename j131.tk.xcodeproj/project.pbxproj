@@ -24,6 +24,8 @@
 		65AB46D01C85ABCF00E1EA38 /* Stack.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65AB46CB1C85ABCF00E1EA38 /* Stack.swift */; };
 		65DF2EAD1C892EBD00E11D43 /* Reachability.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65DF2EAC1C892EBD00E11D43 /* Reachability.swift */; };
 		65DF2EAF1C89347900E11D43 /* SettingController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65DF2EAE1C89347900E11D43 /* SettingController.swift */; };
+		65EDA99E1C8C0C830032E6F7 /* libMobClickLibrary.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 65EDA99B1C8C0C830032E6F7 /* libMobClickLibrary.a */; };
+		65EDA9A11C8C0D000032E6F7 /* libz.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 65EDA9A01C8C0D000032E6F7 /* libz.tbd */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -68,6 +70,10 @@
 		65AB46CB1C85ABCF00E1EA38 /* Stack.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Stack.swift; sourceTree = "<group>"; };
 		65DF2EAC1C892EBD00E11D43 /* Reachability.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Reachability.swift; sourceTree = "<group>"; };
 		65DF2EAE1C89347900E11D43 /* SettingController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingController.swift; sourceTree = "<group>"; };
+		65EDA99B1C8C0C830032E6F7 /* libMobClickLibrary.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libMobClickLibrary.a; sourceTree = "<group>"; };
+		65EDA99C1C8C0C830032E6F7 /* MobClick.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MobClick.h; sourceTree = "<group>"; };
+		65EDA99D1C8C0C830032E6F7 /* MobClickSocialAnalytics.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MobClickSocialAnalytics.h; sourceTree = "<group>"; };
+		65EDA9A01C8C0D000032E6F7 /* libz.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libz.tbd; path = usr/lib/libz.tbd; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -75,6 +81,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				65EDA9A11C8C0D000032E6F7 /* libz.tbd in Frameworks */,
+				65EDA99E1C8C0C830032E6F7 /* libMobClickLibrary.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -98,6 +106,7 @@
 		654C0FD91C23F0000052E1D1 = {
 			isa = PBXGroup;
 			children = (
+				65EDA9A01C8C0D000032E6F7 /* libz.tbd */,
 				654C0FE41C23F0010052E1D1 /* j131.tk-iOS */,
 				654C0FF91C23F0010052E1D1 /* j131.tk-iOSTests */,
 				654C10041C23F0010052E1D1 /* j131.tk-iOSUITests */,
@@ -161,6 +170,7 @@
 		658601611C85B87400D621BB /* lib */ = {
 			isa = PBXGroup;
 			children = (
+				65EDA9A21C8C0E0A0032E6F7 /* UMeng */,
 				65AB46C71C85ABCF00E1EA38 /* ApiRequest.swift */,
 				65AB46C91C85ABCF00E1EA38 /* HttpRequest.swift */,
 				65AB46CA1C85ABCF00E1EA38 /* Queue.swift */,
@@ -187,6 +197,16 @@
 				65DF2EAE1C89347900E11D43 /* SettingController.swift */,
 			);
 			name = controller;
+			sourceTree = "<group>";
+		};
+		65EDA9A21C8C0E0A0032E6F7 /* UMeng */ = {
+			isa = PBXGroup;
+			children = (
+				65EDA99B1C8C0C830032E6F7 /* libMobClickLibrary.a */,
+				65EDA99C1C8C0C830032E6F7 /* MobClick.h */,
+				65EDA99D1C8C0C830032E6F7 /* MobClickSocialAnalytics.h */,
+			);
+			name = UMeng;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -479,6 +499,10 @@
 				INFOPLIST_FILE = "j131.tk-iOS/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/j131.tk-iOS",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = tk.j131.iOS;
 				PRODUCT_NAME = j131.tk;
 				SWIFT_OBJC_BRIDGING_HEADER = "j131.tk-iOS/j131.tk-Bridging-Header.h";
@@ -495,6 +519,10 @@
 				INFOPLIST_FILE = "j131.tk-iOS/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/j131.tk-iOS",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = tk.j131.iOS;
 				PRODUCT_NAME = j131.tk;
 				SWIFT_OBJC_BRIDGING_HEADER = "j131.tk-iOS/j131.tk-Bridging-Header.h";

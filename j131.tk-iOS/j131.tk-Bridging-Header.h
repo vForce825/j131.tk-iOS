@@ -13,3 +13,5 @@
 
 #define FileHashDefaultChunkSizeForReadingData 4096
 CFStringRef FileMD5HashCreateWithPath(CFStringRef filePath, size_t chunkSizeForReadingData);
+
+#import "MobClick.h"
