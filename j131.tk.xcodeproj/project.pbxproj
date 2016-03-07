@@ -26,6 +26,7 @@
 		65DF2EAF1C89347900E11D43 /* SettingController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65DF2EAE1C89347900E11D43 /* SettingController.swift */; };
 		65EDA99E1C8C0C830032E6F7 /* libMobClickLibrary.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 65EDA99B1C8C0C830032E6F7 /* libMobClickLibrary.a */; };
 		65EDA9A11C8C0D000032E6F7 /* libz.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 65EDA9A01C8C0D000032E6F7 /* libz.tbd */; };
+		65FCAA981C8D10A60087F4ED /* FileCache.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65FCAA971C8D10A60087F4ED /* FileCache.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -74,6 +75,7 @@
 		65EDA99C1C8C0C830032E6F7 /* MobClick.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MobClick.h; sourceTree = "<group>"; };
 		65EDA99D1C8C0C830032E6F7 /* MobClickSocialAnalytics.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MobClickSocialAnalytics.h; sourceTree = "<group>"; };
 		65EDA9A01C8C0D000032E6F7 /* libz.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libz.tbd; path = usr/lib/libz.tbd; sourceTree = SDKROOT; };
+		65FCAA971C8D10A60087F4ED /* FileCache.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FileCache.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -178,6 +180,7 @@
 				654ACF0F1C88536100659164 /* FileMD5Hash.c */,
 				654ACF0E1C88536000659164 /* j131.tk-Bridging-Header.h */,
 				65DF2EAC1C892EBD00E11D43 /* Reachability.swift */,
+				65FCAA971C8D10A60087F4ED /* FileCache.swift */,
 			);
 			name = lib;
 			sourceTree = "<group>";
@@ -352,6 +355,7 @@
 				654C0FE61C23F0010052E1D1 /* AppDelegate.swift in Sources */,
 				65DF2EAF1C89347900E11D43 /* SettingController.swift in Sources */,
 				65DF2EAD1C892EBD00E11D43 /* Reachability.swift in Sources */,
+				65FCAA981C8D10A60087F4ED /* FileCache.swift in Sources */,
 				65AB46CC1C85ABCF00E1EA38 /* ApiRequest.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

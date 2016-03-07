@@ -15,7 +15,6 @@ class MainController: UITableViewController, UIDocumentInteractionControllerDele
     private var downloadTask:NSURLSessionDownloadTask? = nil;
     private var downloadIndex:NSIndexPath? = nil;
     private var localFilePath:String? = nil;
-    private let cacheDirectory = NSHomeDirectory().stringByAppendingString("/Library/Caches/");
     
     override func viewDidLoad() {
         self.tableView.registerNib(UINib(nibName: "ItemCell", bundle: nil), forCellReuseIdentifier: "ItemCell");
@@ -85,8 +84,8 @@ class MainController: UITableViewController, UIDocumentInteractionControllerDele
     func URLSession(session: NSURLSession, downloadTask: NSURLSessionDownloadTask, didFinishDownloadingToURL location: NSURL) {
         let data = NSData(contentsOfURL: location)
         if (data != nil) {
-            data!.writeToFile(self.localFilePath!, atomically: true);
             dispatch_async(dispatch_get_main_queue()) {
+                FileCache.write(self.localFilePath!, data: data!);
                 self.previewFile(NSURL(fileURLWithPath: self.localFilePath!));
             }
         } else {
@@ -167,15 +166,15 @@ class MainController: UITableViewController, UIDocumentInteractionControllerDele
     func readFile(index: NSIndexPath, complete: (String) -> ()) {
         let row = index.row;
         let remotePath = fileList![row].Path;
-        let localFilePath = self.cacheDirectory.stringByAppendingString(remotePath.substringFromIndex(path.startIndex.advancedBy(1)).stringByReplacingOccurrencesOfString("/", withString: "_"));
+        let localFilePath = FileCache.getCachePath(remotePath);
         self.localFilePath = localFilePath;
-        //for local static cache
+        //缓存策略
         let localMd5hash = FileMD5HashCreateWithPath(localFilePath as CFStringRef, 4096);//It will be nil if the file doesn't exist
         var params = Dictionary<String, String>();
         params["path"] = remotePath;
         let remoteMd5Hash = ApiRequest.get(ApiRequest.FILE_CHECKSUM, params: params)?.objectForKey("msg");
-        //When server failed to respond a checksum, we will re-fetch the file
-        //But if the network in unavailable, we'll check if we have its cache
+        //服务器没有响应文件MD5的验证请求时，尝试重新获取
+        //在没有网络时直接尝试调用本地缓存
         if (localMd5hash == nil || remoteMd5Hash == nil || (remoteMd5Hash != nil && localMd5hash.takeUnretainedValue() as String != remoteMd5Hash as! String)) {
             if (Reachability().connectionStatus() != ReachabilityStatus.Offline) {
                 let session = NSURLSession(configuration: NSURLSessionConfiguration.defaultSessionConfiguration(), delegate: self, delegateQueue: nil)
