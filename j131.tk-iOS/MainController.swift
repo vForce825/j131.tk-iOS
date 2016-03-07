@@ -14,7 +14,6 @@ class MainController: UITableViewController, UIDocumentInteractionControllerDele
     internal var path:String = "/";
     private var downloadTask:NSURLSessionDownloadTask? = nil;
     private var downloadIndex:NSIndexPath? = nil;
-    private var localFilePath:String? = nil;
     
     override func viewDidLoad() {
         self.tableView.registerNib(UINib(nibName: "ItemCell", bundle: nil), forCellReuseIdentifier: "ItemCell");
@@ -85,19 +84,17 @@ class MainController: UITableViewController, UIDocumentInteractionControllerDele
         let data = NSData(contentsOfURL: location)
         if (data != nil) {
             dispatch_async(dispatch_get_main_queue()) {
-                FileCache.write(self.localFilePath!, data: data!);
-                self.previewFile(NSURL(fileURLWithPath: self.localFilePath!));
+                let key = self.fileList![(self.downloadIndex!.row)].Path;
+                FileCache.write(key, data: data!);
+                self.previewFile(FileCache.read(key)!);
             }
         } else {
             self.showError("下载失败", message: "没有接收到服务器的返回数据，请稍后重试！");
         }
         //Cleaning
         dispatch_async(dispatch_get_main_queue()) {
-            (self.tableView!.cellForRowAtIndexPath(self.downloadIndex!) as! ItemCell).progressView.hidden = true;
-            (self.tableView!.cellForRowAtIndexPath(self.downloadIndex!) as! ItemCell).cancelButton.hidden = true;
-            (self.tableView!.cellForRowAtIndexPath(self.downloadIndex!) as! ItemCell).progressView.progress = 0;
+            (self.tableView!.cellForRowAtIndexPath(self.downloadIndex!) as! ItemCell).endDownload();
             self.downloadTask = nil;
-            self.localFilePath = nil;
             self.downloadIndex = nil;
         }
     }
@@ -115,12 +112,9 @@ class MainController: UITableViewController, UIDocumentInteractionControllerDele
             }
             //Cleaning
             if (self.downloadIndex != nil) { //to prevent unnecessary clean after complete
-                (self.tableView!.cellForRowAtIndexPath(self.downloadIndex!) as! ItemCell).progressView.hidden = true;
-                (self.tableView!.cellForRowAtIndexPath(self.downloadIndex!) as! ItemCell).cancelButton.hidden = true;
-                (self.tableView!.cellForRowAtIndexPath(self.downloadIndex!) as! ItemCell).progressView.progress = 0;
+                (self.tableView!.cellForRowAtIndexPath(self.downloadIndex!) as! ItemCell).endDownload();
                 self.downloadTask = nil;
                 self.downloadIndex = nil;
-                self.localFilePath = nil;
             }
         }
     }
@@ -167,7 +161,6 @@ class MainController: UITableViewController, UIDocumentInteractionControllerDele
         let row = index.row;
         let remotePath = fileList![row].Path;
         let localFilePath = FileCache.getCachePath(remotePath);
-        self.localFilePath = localFilePath;
         //缓存策略
         let localMd5hash = FileMD5HashCreateWithPath(localFilePath as CFStringRef, 4096);//It will be nil if the file doesn't exist
         var params = Dictionary<String, String>();
@@ -180,8 +173,7 @@ class MainController: UITableViewController, UIDocumentInteractionControllerDele
                 let session = NSURLSession(configuration: NSURLSessionConfiguration.defaultSessionConfiguration(), delegate: self, delegateQueue: nil)
                 self.downloadTask = session.downloadTaskWithURL(HttpRequest.getURL("http://www.j131.tk" + remotePath));
                 //显示进度 & 允许取消
-                (self.tableView!.cellForRowAtIndexPath(index) as! ItemCell).progressView.hidden = false;
-                (self.tableView!.cellForRowAtIndexPath(index) as! ItemCell).cancelButton.hidden = false;
+                (self.tableView!.cellForRowAtIndexPath(index) as! ItemCell).startDownload();
                 (self.tableView!.cellForRowAtIndexPath(index) as! ItemCell).registerCancelButtonDownEvent(cancelDownload);
                 self.downloadIndex = index;
                 self.downloadTask!.resume();

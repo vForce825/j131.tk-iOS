@@ -43,4 +43,16 @@ class ItemCell: UITableViewCell {
     @IBAction func cancelButtonDown(sender: AnyObject) {
         cancelButtonDownEventHandler();
     }
+    
+    func startDownload() {
+        self.progressView.progress = 0;
+        self.progressView.hidden = false;
+        self.cancelButton.hidden = false;
+    }
+    
+    func endDownload() {
+        self.progressView.progress = 0;
+        self.progressView.hidden = true;
+        self.cancelButton.hidden = true;
+    }
 }
