@@ -174,7 +174,7 @@ class MainController: UITableViewController, UIDocumentInteractionControllerDele
                 self.downloadTask = session.downloadTaskWithURL(HttpRequest.getURL("http://www.j131.tk" + remotePath));
                 //显示进度 & 允许取消
                 (self.tableView!.cellForRowAtIndexPath(index) as! ItemCell).startDownload();
-                (self.tableView!.cellForRowAtIndexPath(index) as! ItemCell).registerCancelButtonDownEvent(cancelDownload);
+                (self.tableView!.cellForRowAtIndexPath(index) as! ItemCell).registerCancelButtonDownEvent({self.downloadTask?.cancel();});
                 self.downloadIndex = index;
                 self.downloadTask!.resume();
             }
@@ -192,9 +192,5 @@ class MainController: UITableViewController, UIDocumentInteractionControllerDele
             self.showError("无法打开文件", message: "没有对应的应用程序可以打开此文件！");
         }
         self.navigationItem.leftBarButtonItem?.target = "showTabBar";
-    }
-    
-    func cancelDownload() {
-        self.downloadTask?.cancel();
     }
 }
