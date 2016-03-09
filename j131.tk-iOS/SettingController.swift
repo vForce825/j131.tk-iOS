@@ -9,7 +9,6 @@
 import UIKit
 
 class SettingController: UITableViewController {
-    var sections:Dictionary<Int, String> = [0 : "缓存"]; //section编号必须从0开始
     var actions:Dictionary<Int, Dictionary<Int, Array<Any>>> = [
         0 : [
             0 : ["清除缓存", clearCache],
@@ -21,7 +20,7 @@ class SettingController: UITableViewController {
     }
     
     override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
-        return sections.count;
+        return actions.count;
     }
     
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -41,6 +40,9 @@ class SettingController: UITableViewController {
     }
     
     override func tableView(tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
+        if (section != actions.count-1) {
+            return nil;
+        }
         let view = UIView();
         view.backgroundColor = UIColor(red: 242/255, green: 242/255, blue: 242/255, alpha: 1.0);
         return view;
