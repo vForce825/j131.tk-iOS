@@ -9,6 +9,7 @@
 import UIKit
 
 class SettingController: UITableViewController {
+    let greyBgColor = UIColor(red: 0.95, green: 0.95, blue: 0.95, alpha: 1.0);
     var actions:Dictionary<Int, Dictionary<Int, Array<Any>>> = [
         0 : [
             0 : ["清除缓存", clearCache],
@@ -16,7 +17,7 @@ class SettingController: UITableViewController {
     ];
     
     override func viewDidLoad() {
-        self.tableView.backgroundColor = UIColor(red: 242/255, green: 242/255, blue: 242/255, alpha: 1.0);
+        self.tableView.backgroundColor = self.greyBgColor;
     }
     
     override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
@@ -36,7 +37,7 @@ class SettingController: UITableViewController {
     }
     
     override func tableView(tableView: UITableView, willDisplayHeaderView view: UIView, forSection section: Int) {
-        view.tintColor = UIColor(red: 242/255, green: 242/255, blue: 242/255, alpha: 1.0);
+        view.tintColor = self.greyBgColor;
     }
     
     override func tableView(tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
@@ -44,7 +45,7 @@ class SettingController: UITableViewController {
             return nil;
         }
         let view = UIView();
-        view.backgroundColor = UIColor(red: 242/255, green: 242/255, blue: 242/255, alpha: 1.0);
+        view.backgroundColor = self.greyBgColor;
         return view;
     }
     
