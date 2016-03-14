@@ -13,7 +13,7 @@ class SettingController: UITableViewController {
     var actions:Dictionary<Int, Dictionary<Int, Array<Any>>> = [
         0 : [
             0 : ["清除缓存", clearCache],
-        ],
+        ]
     ];
     
     override func viewDidLoad() {
@@ -30,10 +30,6 @@ class SettingController: UITableViewController {
     
     override func tableView(tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
         return "";
-    }
-    
-    override func tableView(tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-        return 20.0;
     }
     
     override func tableView(tableView: UITableView, willDisplayHeaderView view: UIView, forSection section: Int) {
