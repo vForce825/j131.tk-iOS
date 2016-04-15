@@ -153,10 +153,6 @@ class MainController: UITableViewController, UIDocumentInteractionControllerDele
         }
     }
     
-    func showTabBar() {
-        self.tabBarController?.tabBar.hidden = false;
-    }
-    
     func readFile(index: NSIndexPath, complete: (String) -> ()) {
         let row = index.row;
         let remotePath = fileList![row].Path;
@@ -191,6 +187,5 @@ class MainController: UITableViewController, UIDocumentInteractionControllerDele
         if (!otherCanOpen) {
             self.showError("无法打开文件", message: "没有对应的应用程序可以打开此文件！");
         }
-        self.navigationItem.leftBarButtonItem?.target = "showTabBar";
     }
 }

@@ -9,7 +9,23 @@
 import Foundation
 
 class FileCache {
-    internal static let cacheDirectory = NSHomeDirectory().stringByAppendingString("/Library/Caches/");
+    internal static let cacheDirectory = NSHomeDirectory().stringByAppendingString("/Library/Caches/files/");
+    
+    func fileCount() -> Int {
+        let fileManager = NSFileManager.defaultManager();
+        let enumerator = fileManager.enumeratorAtPath(FileCache.cacheDirectory);
+        var count = 0;
+        while enumerator?.nextObject() != nil {
+            count = count + 1;
+        }
+        return count;
+    }
+    
+    subscript(key: Int) -> String {
+        let fileManager = NSFileManager.defaultManager();
+        let enumerator = fileManager.enumeratorAtPath(FileCache.cacheDirectory)!;
+        return enumerator.allObjects[key] as! String;
+    }
     
     static func getCachePath(key: String) -> String {
         return self.cacheDirectory.stringByAppendingString(key.substringFromIndex(key.startIndex.advancedBy(1)).stringByReplacingOccurrencesOfString("/", withString: "_"));
@@ -25,6 +41,14 @@ class FileCache {
     
     static func write(key: String, data: NSData) {
         self.remove(key);
+        let fileManager = NSFileManager.defaultManager();
+        if (!fileManager.fileExistsAtPath(self.cacheDirectory)) {
+            do {
+                try fileManager.createDirectoryAtPath(self.cacheDirectory, withIntermediateDirectories: false, attributes: nil);
+            } catch {
+                
+            }
+        }
         data.writeToFile(self.getCachePath(key), atomically: true);
     }
     
@@ -40,7 +64,7 @@ class FileCache {
     }
     
     static func clearAll() -> String {
-        let fileManager = NSFileManager.defaultManager()
+        let fileManager = NSFileManager.defaultManager();
         let cacheURL = NSURL(fileURLWithPath: self.cacheDirectory);
         let enumerator = fileManager.enumeratorAtPath(self.cacheDirectory);
         var cacheSize:Double = 0;

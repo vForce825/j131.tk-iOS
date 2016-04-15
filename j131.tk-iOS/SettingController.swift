@@ -12,7 +12,10 @@ class SettingController: UITableViewController {
     let greyBgColor = UIColor(red: 0.95, green: 0.95, blue: 0.95, alpha: 1.0);
     var actions:Dictionary<Int, Dictionary<Int, Array<Any>>> = [
         0 : [
-            0 : ["清除缓存", clearCache],
+            0 : ["查看缓存", showCache],
+        ],
+        1 : [
+            0 : ["清除全部缓存", clearCache],
         ]
     ];
     
@@ -56,6 +59,10 @@ class SettingController: UITableViewController {
         self.tableView.deselectRowAtIndexPath(indexPath, animated: true);
         let function = actions[indexPath.section]![indexPath.row]![1] as! SettingController->()->();
         function(self)();
+    }
+    
+    func showCache() {
+        self.navigationController!.pushViewController(CachedDocumentController(), animated: true);
     }
     
     func clearCache() {

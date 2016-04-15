@@ -17,6 +17,8 @@
 		656455521C86E0F100D83EB0 /* ItemCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 656455501C86E0F100D83EB0 /* ItemCell.swift */; };
 		656455531C86E0F100D83EB0 /* ItemCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 656455511C86E0F100D83EB0 /* ItemCell.xib */; };
 		658601651C85B8CE00D621BB /* MainController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 658601641C85B8CE00D621BB /* MainController.swift */; };
+		659757BA1CA27E470096C1A2 /* CachedDocument.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 659757B91CA27E470096C1A2 /* CachedDocument.storyboard */; };
+		659757BC1CA27EA30096C1A2 /* CachedDocumentController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 659757BB1CA27EA30096C1A2 /* CachedDocumentController.swift */; };
 		65AB46CC1C85ABCF00E1EA38 /* ApiRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65AB46C71C85ABCF00E1EA38 /* ApiRequest.swift */; };
 		65AB46CD1C85ABCF00E1EA38 /* FileList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65AB46C81C85ABCF00E1EA38 /* FileList.swift */; };
 		65AB46CE1C85ABCF00E1EA38 /* HttpRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65AB46C91C85ABCF00E1EA38 /* HttpRequest.swift */; };
@@ -64,6 +66,8 @@
 		656455501C86E0F100D83EB0 /* ItemCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ItemCell.swift; sourceTree = "<group>"; };
 		656455511C86E0F100D83EB0 /* ItemCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ItemCell.xib; sourceTree = "<group>"; };
 		658601641C85B8CE00D621BB /* MainController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainController.swift; sourceTree = "<group>"; };
+		659757B91CA27E470096C1A2 /* CachedDocument.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = CachedDocument.storyboard; sourceTree = "<group>"; };
+		659757BB1CA27EA30096C1A2 /* CachedDocumentController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CachedDocumentController.swift; sourceTree = "<group>"; };
 		65AB46C71C85ABCF00E1EA38 /* ApiRequest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ApiRequest.swift; sourceTree = "<group>"; };
 		65AB46C81C85ABCF00E1EA38 /* FileList.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FileList.swift; sourceTree = "<group>"; };
 		65AB46C91C85ABCF00E1EA38 /* HttpRequest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HttpRequest.swift; sourceTree = "<group>"; };
@@ -165,6 +169,7 @@
 				654C0FE91C23F0010052E1D1 /* Main.storyboard */,
 				656455501C86E0F100D83EB0 /* ItemCell.swift */,
 				656455511C86E0F100D83EB0 /* ItemCell.xib */,
+				659757B91CA27E470096C1A2 /* CachedDocument.storyboard */,
 			);
 			name = view;
 			sourceTree = "<group>";
@@ -198,6 +203,7 @@
 			children = (
 				658601641C85B8CE00D621BB /* MainController.swift */,
 				65DF2EAE1C89347900E11D43 /* SettingController.swift */,
+				659757BB1CA27EA30096C1A2 /* CachedDocumentController.swift */,
 			);
 			name = controller;
 			sourceTree = "<group>";
@@ -321,6 +327,7 @@
 				654C0FF01C23F0010052E1D1 /* LaunchScreen.storyboard in Resources */,
 				654C0FED1C23F0010052E1D1 /* Assets.xcassets in Resources */,
 				654C0FEB1C23F0010052E1D1 /* Main.storyboard in Resources */,
+				659757BA1CA27E470096C1A2 /* CachedDocument.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -356,6 +363,7 @@
 				65DF2EAF1C89347900E11D43 /* SettingController.swift in Sources */,
 				65DF2EAD1C892EBD00E11D43 /* Reachability.swift in Sources */,
 				65FCAA981C8D10A60087F4ED /* FileCache.swift in Sources */,
+				659757BC1CA27EA30096C1A2 /* CachedDocumentController.swift in Sources */,
 				65AB46CC1C85ABCF00E1EA38 /* ApiRequest.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
