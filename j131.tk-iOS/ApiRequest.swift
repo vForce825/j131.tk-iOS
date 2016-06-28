@@ -9,9 +9,9 @@
 import Foundation
 import UIKit
 class ApiRequest {
-    static let LIST_COUNT = "http://api.j131.tk/api/listCount";
-    static let LIST_FOLDER = "http://api.j131.tk/api/listFolder";
-    static let FILE_CHECKSUM = "http://api.j131.tk/api/fileChecksum";
+    static let LIST_COUNT = "https://api.j131.tk/api/listCount";
+    static let LIST_FOLDER = "https://api.j131.tk/api/listFolder";
+    static let FILE_CHECKSUM = "https://api.j131.tk/api/fileChecksum";
     static func get(url: String, params: Dictionary<String, String>?) -> AnyObject? {
         if (Reachability().connectionStatus() == ReachabilityStatus.Offline) {
             return nil;

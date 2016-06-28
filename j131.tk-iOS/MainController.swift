@@ -167,7 +167,7 @@ class MainController: UITableViewController, UIDocumentInteractionControllerDele
         if (localMd5hash == nil || remoteMd5Hash == nil || (remoteMd5Hash != nil && localMd5hash.takeUnretainedValue() as String != remoteMd5Hash as! String)) {
             if (Reachability().connectionStatus() != ReachabilityStatus.Offline) {
                 let session = NSURLSession(configuration: NSURLSessionConfiguration.defaultSessionConfiguration(), delegate: self, delegateQueue: nil)
-                self.downloadTask = session.downloadTaskWithURL(HttpRequest.getURL("http://www.j131.tk" + remotePath));
+                self.downloadTask = session.downloadTaskWithURL(HttpRequest.getURL("https://download.j131.tk" + remotePath));
                 //显示进度 & 允许取消
                 (self.tableView!.cellForRowAtIndexPath(index) as! ItemCell).startDownload();
                 (self.tableView!.cellForRowAtIndexPath(index) as! ItemCell).registerCancelButtonDownEvent({self.downloadTask?.cancel();});
